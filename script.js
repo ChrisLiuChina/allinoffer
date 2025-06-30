@@ -121,153 +121,25 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // 加载成功案例数据
-    loadCases();
-});
-
-// 加载成功案例数据
-async function loadCases() {
-    try {
-        const response = await fetch('http://localhost:4001/api/cases');
-        const cases = await response.json();
+    // 联系表单增强
+    const formInputs = document.querySelectorAll('.form-group input, .form-group textarea, .form-group select');
+    
+    formInputs.forEach(input => {
+        // 焦点效果
+        input.addEventListener('focus', function() {
+            this.parentElement.style.transform = 'scale(1.02)';
+        });
         
-        const casesGrid = document.querySelector('.cases-grid');
-        if (casesGrid && cases.length > 0) {
-            // 清空现有内容
-            casesGrid.innerHTML = '';
-            
-            // 渲染案例数据
-            cases.forEach(caseItem => {
-                const caseCard = document.createElement('div');
-                caseCard.className = 'case-card';
-                caseCard.innerHTML = `
-                    <div class="case-header">
-                        <h3>${caseItem.title}</h3>
-                        <span class="case-result">录取成功</span>
-                    </div>
-                    ${caseItem.imageUrl ? `<div class="case-image">
-                        <img src="http://localhost:4001${caseItem.imageUrl}" alt="${caseItem.title}" style="width:100%;height:200px;object-fit:cover;border-radius:8px;margin-bottom:12px;">
-                    </div>` : ''}
-                    <p class="case-details">${caseItem.description || '通过我们的专业指导，成功获得理想院校录取。'}</p>
-                    <div class="case-tags">
-                        <span class="tag">专业服务</span>
-                        <span class="tag">免中介费</span>
-                        <span class="tag">成功录取</span>
-                    </div>
-                `;
-                casesGrid.appendChild(caseCard);
-            });
-        } else if (casesGrid) {
-            // 如果没有案例数据，显示默认内容
-            casesGrid.innerHTML = `
-                <div class="case-card">
-                    <div class="case-header">
-                        <h3>张同学</h3>
-                        <span class="case-result">录取成功</span>
-                    </div>
-                    <p class="case-school">墨尔本大学 - 商科硕士</p>
-                    <p class="case-details">
-                        张同学本科毕业于国内211大学，通过我们的专业指导，
-                        成功申请到墨尔本大学商科硕士项目，获得全额奖学金。
-                    </p>
-                    <div class="case-tags">
-                        <span class="tag">GPA 3.8</span>
-                        <span class="tag">雅思 7.0</span>
-                        <span class="tag">全额奖学金</span>
-                    </div>
-                </div>
-                <div class="case-card">
-                    <div class="case-header">
-                        <h3>李同学</h3>
-                        <span class="case-result">录取成功</span>
-                    </div>
-                    <p class="case-school">悉尼大学 - 计算机科学本科</p>
-                    <p class="case-details">
-                        李同学通过我们的指导，成功申请到悉尼大学计算机科学专业，
-                        并获得了部分奖学金支持。
-                    </p>
-                    <div class="case-tags">
-                        <span class="tag">高考成绩优秀</span>
-                        <span class="tag">雅思 6.5</span>
-                        <span class="tag">部分奖学金</span>
-                    </div>
-                </div>
-                <div class="case-card">
-                    <div class="case-header">
-                        <h3>王同学</h3>
-                        <span class="case-result">录取成功</span>
-                    </div>
-                    <p class="case-school">昆士兰大学 - 工程硕士</p>
-                    <p class="case-details">
-                        王同学本科背景较弱，通过我们的专业规划和指导，
-                        成功申请到昆士兰大学工程硕士项目。
-                    </p>
-                    <div class="case-tags">
-                        <span class="tag">GPA 3.2</span>
-                        <span class="tag">雅思 6.5</span>
-                        <span class="tag">背景提升</span>
-                    </div>
-                </div>
-            `;
-        }
-    } catch (error) {
-        console.error('加载成功案例失败:', error);
-        // 加载失败时显示默认内容
-        const casesGrid = document.querySelector('.cases-grid');
-        if (casesGrid) {
-            casesGrid.innerHTML = `
-                <div class="case-card">
-                    <div class="case-header">
-                        <h3>张同学</h3>
-                        <span class="case-result">录取成功</span>
-                    </div>
-                    <p class="case-school">墨尔本大学 - 商科硕士</p>
-                    <p class="case-details">
-                        张同学本科毕业于国内211大学，通过我们的专业指导，
-                        成功申请到墨尔本大学商科硕士项目，获得全额奖学金。
-                    </p>
-                    <div class="case-tags">
-                        <span class="tag">GPA 3.8</span>
-                        <span class="tag">雅思 7.0</span>
-                        <span class="tag">全额奖学金</span>
-                    </div>
-                </div>
-                <div class="case-card">
-                    <div class="case-header">
-                        <h3>李同学</h3>
-                        <span class="case-result">录取成功</span>
-                    </div>
-                    <p class="case-school">悉尼大学 - 计算机科学本科</p>
-                    <p class="case-details">
-                        李同学通过我们的指导，成功申请到悉尼大学计算机科学专业，
-                        并获得了部分奖学金支持。
-                    </p>
-                    <div class="case-tags">
-                        <span class="tag">高考成绩优秀</span>
-                        <span class="tag">雅思 6.5</span>
-                        <span class="tag">部分奖学金</span>
-                    </div>
-                </div>
-                <div class="case-card">
-                    <div class="case-header">
-                        <h3>王同学</h3>
-                        <span class="case-result">录取成功</span>
-                    </div>
-                    <p class="case-school">昆士兰大学 - 工程硕士</p>
-                    <p class="case-details">
-                        王同学本科背景较弱，通过我们的专业规划和指导，
-                        成功申请到昆士兰大学工程硕士项目。
-                    </p>
-                    <div class="case-tags">
-                        <span class="tag">GPA 3.2</span>
-                        <span class="tag">雅思 6.5</span>
-                        <span class="tag">背景提升</span>
-                    </div>
-                </div>
-            `;
-        }
-    }
-}
+        input.addEventListener('blur', function() {
+            this.parentElement.style.transform = 'scale(1)';
+        });
+        
+        // 实时验证
+        input.addEventListener('input', function() {
+            validateField(this);
+        });
+    });
+});
 
 // 表单验证
 function validateForm(data) {
@@ -419,27 +291,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
 });
 
-// 联系表单增强
-document.addEventListener('DOMContentLoaded', function() {
-    const formInputs = document.querySelectorAll('.form-group input, .form-group textarea, .form-group select');
-    
-    formInputs.forEach(input => {
-        // 焦点效果
-        input.addEventListener('focus', function() {
-            this.parentElement.style.transform = 'scale(1.02)';
-        });
-        
-        input.addEventListener('blur', function() {
-            this.parentElement.style.transform = 'scale(1)';
-        });
-        
-        // 实时验证
-        input.addEventListener('input', function() {
-            validateField(this);
-        });
-    });
-});
-
 function validateField(field) {
     const value = field.value.trim();
     let isValid = true;
@@ -510,4 +361,59 @@ style.textContent = `
         animation: fadeIn 0.3s ease;
     }
 `;
-document.head.appendChild(style); 
+document.head.appendChild(style);
+
+// 录取捷报表格自动循环轮播（窗口8行，每次滚动一行，无缝循环）
+(function() {
+    const tbody = document.getElementById('cases-ticker-body');
+    if (!tbody) return;
+
+    let rows = Array.from(tbody.children);
+    const total = rows.length;
+    if (total === 0) return;
+
+    const visibleCount = 8;
+    let index = 0;
+    let interval = null;
+
+    if (total <= visibleCount) return;
+
+    // 克隆前8行到末尾
+    for (let i = 0; i < visibleCount; i++) {
+        tbody.appendChild(rows[i].cloneNode(true));
+    }
+    rows = Array.from(tbody.children);
+    const rowHeight = rows[0].offsetHeight || 52;
+
+    function scrollTable() {
+        index++;
+        tbody.style.transition = 'transform 0.5s cubic-bezier(.4,0,.2,1)';
+        tbody.style.transform = `translateY(-${index * rowHeight}px)`;
+
+        // 到达原始数据末尾时，瞬间回到初始
+        if (index === total) {
+            setTimeout(() => {
+                tbody.style.transition = 'none';
+                tbody.style.transform = 'translateY(0)';
+                index = 0;
+            }, 500);
+        }
+    }
+
+    function startTicker() {
+        interval = setInterval(scrollTable, 2000);
+    }
+    function stopTicker() {
+        if (interval) {
+            clearInterval(interval);
+            interval = null;
+        }
+    }
+
+    tbody.addEventListener('mouseenter', stopTicker);
+    tbody.addEventListener('mouseleave', startTicker);
+
+    tbody.style.willChange = 'transform';
+    tbody.style.transform = 'translateY(0)';
+    startTicker();
+})(); 

@@ -517,10 +517,17 @@ body {
 }
 
 .contact-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 2.5rem;
-    margin-top: 3rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.contact-info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
 }
 
 .contact-info h3 {
@@ -532,15 +539,8 @@ body {
 .contact-item {
     display: flex;
     align-items: center;
-    margin-bottom: 2rem;
-    padding: 1.5rem;
-    background: #f8fafc;
-    border-radius: 15px;
-    transition: transform 0.3s ease;
-}
-
-.contact-item:hover {
-    transform: translateX(10px);
+    justify-content: center;
+    margin-bottom: 18px;
 }
 
 .contact-item i {
@@ -861,15 +861,17 @@ body {
 
 .fashion-hero-brand {
     font-family: 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', Arial, sans-serif;
-    font-size: 2.4rem;
+    font-size: 6rem;
     font-weight: 900;
-    color: #fff;
-    letter-spacing: 4px;
-    text-shadow: 0 2px 12px rgba(0,82,180,0.18), 0 1px 0 #1976d2;
-    background: none;
-    -webkit-background-clip: initial;
-    -webkit-text-fill-color: initial;
-    background-clip: initial;
+    color: #fff !important;
+    letter-spacing: 10px;
+    text-shadow: 0 12px 48px rgba(0,82,180,0.45), 0 6px 0 #1976d2;
+    margin-bottom: 18px;
+    background: none !important;
+    -webkit-background-clip: initial !important;
+    -webkit-text-fill-color: #fff !important;
+    background-clip: initial !important;
+    text-fill-color: #fff !important;
 }
 
 .fashion-hero-slogan {
@@ -1181,26 +1183,140 @@ body {
 }
 
 .wechat-id {
-    font-size: 1.15rem;
-    color: #0052B4;
-    font-weight: 700;
-    letter-spacing: 1px;
-    background: rgba(0,82,180,0.06);
-    border-radius: 6px;
-    padding: 2px 10px;
-    display: inline-block;
-    margin-bottom: 2px;
-    transition: background 0.2s, color 0.2s;
-}
-.wechat-id:hover {
-    background: #0052B4;
-    color: #fff;
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #2ecc9b;
+    margin-top: 4px;
+    text-align: center;
 }
 .wechat-copy-tip {
-    font-size: 0.92rem;
-    color: #8ca6c7;
+    font-size: 0.95rem;
+    color: #888;
     margin-top: 2px;
-    margin-bottom: 0;
-    letter-spacing: 0.5px;
-    user-select: none;
+    text-align: center;
+}
+.qr-card.contact-qr-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 28px 0 0 0;
+    background: #fff;
+    border-radius: 18px;
+    box-shadow: 0 6px 32px 0 rgba(46,204,155,0.13);
+    padding: 28px 32px 18px 32px;
+}
+.qr-img.contact-qr-img {
+    width: 160px;
+    height: 160px;
+    border-radius: 12px;
+    box-shadow: 0 4px 24px 0 rgba(46,204,155,0.18);
+    margin-bottom: 12px;
+    background: #f6fcf8;
+    object-fit: cover;
+}
+.qr-desc {
+    font-size: 1.08rem;
+    color: #2a7c5b;
+    font-weight: 500;
+    margin-top: 6px;
+    text-align: center;
+}
+
+/* 录取捷报表格轮播样式 */
+.cases-ticker-table-wrapper {
+    background: #f6fcf8;
+    border-radius: 20px;
+    box-shadow: 0 4px 24px 0 rgba(0,0,0,0.06);
+    padding: 0;
+    margin: 0 auto 40px auto;
+    max-width: 900px;
+    overflow: hidden;
+    position: relative;
+    min-height: 480px;
+}
+.cases-ticker-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    table-layout: fixed;
+}
+.cases-ticker-table thead {
+    background: #d6f5e3;
+    z-index: 2;
+    position: sticky;
+    top: 0;
+    display: table-header-group;
+}
+.cases-ticker-table tbody {
+    /* 不设置display，保持原生table-row-group */
+    overflow: hidden;
+    width: 100%;
+    background: transparent;
+    position: relative;
+    height: 416px; /* 8行数据的高度 (8 * 52px) */
+}
+.cases-ticker-table tr {
+    /* 不设置display，保持原生table-row */
+    width: 100%;
+    table-layout: fixed;
+    background: transparent;
+    height: 52px;
+}
+.cases-ticker-table th, .cases-ticker-table td {
+    padding: 14px 10px;
+    text-align: left;
+    white-space: nowrap;
+    font-size: 1.05rem;
+    max-width: 180px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 52px;
+    box-sizing: border-box;
+}
+.cases-ticker-table th {
+    font-weight: 600;
+    color: #2a7c5b;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    font-size: 1.12rem;
+    background: #d6f5e3;
+}
+@media (max-width: 900px) {
+    .cases-ticker-table th, .cases-ticker-table td {
+        font-size: 0.98rem;
+        max-width: 110px;
+        padding: 10px 4px;
+    }
+}
+
+.consult-btn {
+    border: 1.5px solid #2ecc9b;
+    background: #fff;
+    color: #2ecc9b;
+    border-radius: 20px;
+    padding: 6px 18px;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.2s, color 0.2s;
+}
+.consult-btn:hover {
+    background: #2ecc9b;
+    color: #fff;
+}
+
+.cases-ticker-table td {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    transition: white-space 0.2s, background 0.2s, color 0.2s;
+    cursor: pointer;
+}
+.cases-ticker-table td:hover {
+    white-space: normal;
+    background: #e8f9f0;
+    color: #1a5c3b;
+    z-index: 10;
+    position: relative;
+    box-shadow: 0 2px 8px 0 rgba(46,204,155,0.10);
 } 
